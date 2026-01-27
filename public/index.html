@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Human State Interpreter</title>
+
+<style>
+*{box-sizing:border-box;font-family:Segoe UI, sans-serif}
+body{
+  margin:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  transition:background 0.6s ease;
+}
+
+.card{
+  width:90%;
+  max-width:650px;
+  background:white;
+  padding:35px;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.12);
+  text-align:center;
+}
+
+h1,h2{margin-bottom:15px}
+p{color:#444}
+
+input{
+  padding:12px;
+  width:80%;
+  border-radius:10px;
+  border:1px solid #ccc;
+  margin-top:10px;
+}
+
+button{
+  padding:12px 22px;
+  margin-top:12px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:15px;
+  transition:0.2s;
+}
+
+.primary{background:#7b7bff;color:white}
+.primary:hover{transform:translateY(-2px)}
+
+.option{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  background:#f3f3ff;
+}
+.option.selected{
+  background:#7b7bff;
+  color:white;
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  margin-top:15px;
+}
+
+.progress{
+  font-size:14px;
+  margin-bottom:10px;
+  color:#555;
+}
+
+/* RESULT BOX COLORS — NOW DIFFERENT */
+.state-box{background:#cfd8ff}        /* Darker for State */
+.reason-box{background:#e4e9ff}       /* Lighter */
+.help-box{background:#edf0ff}         /* Lightest */
+
+.result-box{
+  padding:15px;
+  border-radius:12px;
+  margin:12px 0;
+  cursor:pointer;
+  font-weight:500;
+}
+
+.hidden{display:none}
+
+ul{
+  text-align:left;
+  margin-top:10px;
+  padding-left:18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="card" id="introScreen">
+  <h1>Human State Interpreter</h1>
+  <p>This space helps you understand how you feel, gently and without judgment.</p>
+  <button class="primary" onclick="goName()">Start</button>
+</div>
+
+<!-- NAME -->
+<div class="card hidden" id="nameScreen">
+  <h2>Tell us your name</h2>
+  <input id="nameInput" placeholder="Enter your name"/>
+  <button class="primary" onclick="goRole()">Enter</button>
+</div>
+
+<!-- ROLE — NOW VERTICAL ALIGNMENT -->
+<div class="card hidden" id="roleScreen">
+  <h2>Tell us about you</h2>
+  <button class="primary" onclick="startQuestions()">Student</button>
+  <button class="primary" onclick="startQuestions()">Working Professional</button>
+  <button class="primary" onclick="startQuestions()">Homemaker</button>
+  <button class="primary" onclick="startQuestions()">Other</button>
+</div>
+
+<!-- QUESTIONS -->
+<div class="card hidden" id="questionScreen">
+  <div class="progress" id="progressText"></div>
+  <h2 id="questionText"></h2>
+  <div id="optionsContainer"></div>
+  <div class="nav">
+    <button onclick="prevQuestion()">Previous</button>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="card hidden" id="resultScreen">
+  <h2 id="greeting"></h2>
+
+  <div class="result-box state-box">Quiet Recovery State</div>
+
+  <div class="result-box reason-box" onclick="toggleReason()">See why this result
+    <ul id="reasonList" class="hidden">
+      <li>Your sleep and energy feel low</li>
+      <li>Your emotions feel heavy lately</li>
+      <li>Your mind feels tired or foggy</li>
+    </ul>
+  </div>
+
+  <div class="result-box help-box" onclick="toggleHelp()">What may help you now
+    <ul id="helpList" class="hidden">
+      <li>Move at your own pace</li>
+      <li>Take small breaks during the day</li>
+      <li>Rest without guilt</li>
+    </ul>
+  </div>
+
+  <button class="primary" onclick="location.reload()">Restart Reflection</button>
+</div>
+
+<script>
+let name=""
+let current=0
+let answers=[null,null,null,null,null]
+
+const backgrounds=[
+"linear-gradient(120deg,#e0f7fa,#f1f8ff)",
+"linear-gradient(120deg,#fff3e0,#fff8e6)",
+"linear-gradient(120deg,#f3e5f5,#ede7f6)",
+"linear-gradient(120deg,#e8f5e9,#e0f2f1)",
+"linear-gradient(120deg,#fce4ec,#f3e5f5)"
+]
+
+const questions=[
+"How has your sleep been lately?",
+"How has your physical energy felt?",
+"How have your emotions been moving lately?",
+"How clear or foggy has your thinking felt?",
+"How connected have you felt to others?"
+]
+
+const options=[
+["Good and steady","Light or changing","Broken or hard"],
+["Strong","Okay","Low or drained"],
+["Mostly calm","Mixed","Heavy or overwhelming"],
+["Clear","Sometimes foggy","Very foggy"],
+["Connected","Somewhat connected","Distant or alone"]
+]
+
+function goName(){
+introScreen.classList.add("hidden")
+nameScreen.classList.remove("hidden")
+}
+
+function goRole(){
+name=nameInput.value||"Friend"
+nameScreen.classList.add("hidden")
+roleScreen.classList.remove("hidden")
+}
+
+function startQuestions(){
+roleScreen.classList.add("hidden")
+questionScreen.classList.remove("hidden")
+loadQuestion()
+}
+
+function loadQuestion(){
+document.body.style.background=backgrounds[current]
+questionText.innerText=questions[current]
+progressText.innerText=`${current+1} of ${questions.length}`
+optionsContainer.innerHTML=""
+options[current].forEach((opt,i)=>{
+const btn=document.createElement("button")
+btn.className="option"
+btn.innerText=opt
+if(answers[current]===i) btn.classList.add("selected")
+btn.onclick=()=>{answers[current]=i;loadQuestion()}
+optionsContainer.appendChild(btn)
+})
+}
+
+function nextQuestion(){
+if(answers[current]==null){alert("Please choose an option");return}
+if(current<questions.length-1){
+current++
+loadQuestion()
+}else{
+showResult()
+}
+}
+
+function prevQuestion(){
+if(current>0){
+current--
+loadQuestion()
+}
+}
+
+function showResult(){
+questionScreen.classList.add("hidden")
+resultScreen.classList.remove("hidden")
+greeting.innerText=`Hi, ${name}`
+document.body.style.background="linear-gradient(120deg,#e6f0ff,#dde7ff)"
+}
+
+function toggleReason(){reasonList.classList.toggle("hidden")}
+function toggleHelp(){helpList.classList.toggle("hidden")}
+
+/* ENTER KEY NAVIGATION */
+document.addEventListener("keydown",function(e){
+if(e.key==="Enter"){
+if(!introScreen.classList.contains("hidden")) goName()
+else if(!nameScreen.classList.contains("hidden")) goRole()
+else if(!roleScreen.classList.contains("hidden")) startQuestions()
+else if(!questionScreen.classList.contains("hidden")) nextQuestion()
+}
+})
+</script>
+</body>
+</html>
