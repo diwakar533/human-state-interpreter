@@ -1,128 +1,115 @@
-.
+# 🌿 Human State Interpreter
 
-🌿 Human State Interpreter
+**Human State Interpreter** is a gentle, frontend-only self-reflection web application that helps users understand their current emotional and mental state through a short, guided experience.
 
-Human State Interpreter is a gentle self-reflection web application that helps users understand their current emotional and mental state through a short guided experience.
+This project focuses on **awareness, not diagnosis**. It provides a calm, supportive space where users can pause, reflect, and notice how they are feeling — without judgment, labels, or scores.
 
-This project focuses on awareness, not diagnosis. It provides a calm, supportive space for users to pause and notice how they are feeling.
+---
 
-🎯 Purpose
+## 🎯 Purpose
 
-The goal of this project is to create a non-judgmental reflective tool that:
+The goal of this project is to create a **non-judgmental reflective tool** that:
 
-Encourages emotional self-awareness
+- Encourages emotional self-awareness  
+- Uses simple, human-friendly language  
+- Avoids scores, labels, or medical terminology  
+- Provides supportive suggestions instead of evaluations  
 
-Uses simple, human-friendly language
+This project is designed as a **mini self-reflection experience**, combining psychology-inspired design with interactive frontend development.
 
-Avoids scores, labels, or medical terms
+---
 
-Provides supportive suggestions instead of evaluations
+## 🧠 How It Works
 
-It is designed as a mini project that combines psychology-inspired design with interactive web development.
+### 1️⃣ Welcome Screen
+- Introduces the user to a calm and reflective environment  
+- Sets a gentle and supportive tone  
 
-🧠 How It Works
-1️⃣ Welcome Screen
+### 2️⃣ Name Input
+- User enters their name  
+- Creates a more personal and human-centered experience  
 
-Introduces the user to a calm, reflective space.
+### 3️⃣ “Tell Us About You”
+- User selects a role:
+  - Student  
+  - Working Professional  
+  - Homemaker  
+  - Other  
 
-2️⃣ Name Input
+### 4️⃣ Guided Questions
+The user answers **5 simple questions** related to:
 
-The user enters their name for a more personal experience.
-
-3️⃣ “Tell Us About You”
-
-The user selects a role (Student, Working Professional, Homemaker, Other).
-
-4️⃣ Guided Questions
-
-The user answers 5 simple questions about:
-
-Sleep
-
-Physical energy
-
-Emotions
-
-Mental clarity
-
-Social connection
+- Sleep  
+- Physical energy  
+- Emotions  
+- Mental clarity  
+- Social connection  
 
 Each question:
+- Offers **3 easy-to-understand response options**  
+- Displays progress (e.g., *3 of 5*)  
+- Uses soft background color transitions for calmness  
+- Supports navigation using **Next / Previous buttons** or the **Enter key**  
 
-Has 3 easy-to-understand options
+### 5️⃣ Result Screen
+The result screen presents:
+- A gentle emotional state (e.g., *Quiet Recovery State*)  
+- A personalized greeting (e.g., *Hi, Alex*)  
+- Expandable sections:
+  - **See why this result** – Possible reasons based on responses  
+  - **What may help you now** – Simple, supportive suggestions  
 
-Shows progress (e.g., 3 of 5)
+---
 
-Uses soft background color changes for a calm experience
+## ✨ Key Features
 
-Supports navigation using Next/Previous buttons or the Enter key
+- 🌈 Soft background color changes for each question  
+- 👤 Personalized user greeting  
+- ⌨️ Keyboard navigation support (Enter key)  
+- 📊 Clear progress indicator (e.g., 2 of 5)  
+- 🧩 Expandable explanation and guidance sections  
+- 🎨 Card-based, calming, minimal UI design  
+- 💬 Emotionally safe and simple language  
 
-5️⃣ Result Screen
+---
 
-The app shows:
+## ⚙️ Technologies Used
 
-A gentle state (e.g., Quiet Recovery State)
+- **HTML** – Structure  
+- **CSS** – Styling, layout, colors, transitions  
+- **JavaScript** – Application logic, navigation, and interactivity  
 
-A personalized greeting (e.g., Hi, Alex)
+> This is a **frontend-only project** with no backend or database.
 
-Expandable sections:
+---
 
-See why this result – Possible reasons based on responses
-
-What may help you now – Simple supportive suggestions
-
-✨ Key Features
-
-🌈 Background color changes for each question
-
-👤 Personalized user greeting
-
-⌨️ Keyboard support (Enter key navigation)
-
-📊 Progress indicator (e.g., 2 of 5)
-
-🧩 Expandable explanation and guidance sections
-
-🎨 Soft, card-based, calming UI
-
-💬 Simple and emotionally safe language
-
-⚙️ Technologies Used
-
-HTML – Structure
-
-CSS – Styling, layout, colors
-
-JavaScript – Logic, navigation, interactivity
-
-This is a frontend-only project (no database or backend).
-
-🚫 What This App Is NOT
+## 🚫 What This App Is NOT
 
 This application:
 
-❌ Does not diagnose mental health conditions
+- ❌ Does **not** diagnose mental health conditions  
+- ❌ Does **not** store personal data  
+- ❌ Does **not** provide medical or clinical advice  
 
-❌ Does not store personal data
+It is intended only as a **self-reflection and awareness tool**.
 
-❌ Does not give medical advice
+---
 
-It is only a self-reflection support tool.
+## 💡 Future Improvements
 
-💡 Future Improvements
+Potential enhancements include:
 
-Possible future enhancements:
+- Multiple emotional states instead of a single outcome  
+- Optional session history (with strong privacy protection)  
+- Mood trend tracking over time  
+- Guided breathing or relaxation exercises  
+- Mobile app version  
 
-Multiple emotional states instead of one
+---
 
-Storing session history (with privacy protection)
+## 🏁 Project Summary
 
-Mood trend tracking
+**Human State Interpreter** is a calm, interactive self-reflection web experience that gently helps users notice their emotional and mental state through guided questions and supportive feedback.  
+The project emphasizes **empathy, simplicity, and emotional safety**, making it suitable for portfolios, mini projects, and explorations into human-centered UI/UX design.
 
-Guided breathing or relaxation exercises
-
-Mobile app version
-
-🏁 Project Summary
-
-Human State Interpreter is a calm, interactive self-reflection web experience that helps users gently notice their emotional and mental state using guided questions and supportive feedback.
+---
